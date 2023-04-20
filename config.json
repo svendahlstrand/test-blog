@@ -1,0 +1,90 @@
+{
+    "title": "Micro.blog test",
+    "author": {
+      "name": "Jane Doe",
+      "avatar": "/avatar.jpg",
+      "username": "janedoe"
+    },
+    "baseURL": "http://localhost:1313/",
+    "theme": ["theme-under-test", "theme-blank"],
+  "mediaTypes": {
+    "application/json": {
+      "suffixes": [ "json" ]
+    }
+  },
+  "outputFormats": {
+    "RSS": {
+      "baseName": "feed"
+    },
+    "JSON": {
+      "baseName": "feed"
+    },
+    "RSD": {
+      "mediaType": "application/xml",
+      "baseName": "rsd",
+      "isPlainText": true,
+      "notAlternative": true
+    },
+    "ArchiveJSON": {
+      "mediaType": "application/json",
+      "path": "archive",
+      "baseName": "index",
+      "isPlainText": true,
+      "notAlternative": true
+    },
+    "PhotosJSON": {
+      "mediaType": "application/json",
+      "path": "photos",
+      "baseName": "index",
+      "isPlainText": true,
+      "notAlternative": true
+    },
+    "PodcastXML": {
+      "mediaType": "application/rss+xml",
+      "baseName": "podcast",
+      "isPlainText": true,
+      "notAlternative": true
+    },
+    "PodcastJSON": {
+      "mediaType": "application/json",
+      "baseName": "podcast",
+      "isPlainText": true,
+      "notAlternative": true
+    }
+  },
+  "outputs": {
+    "home": [ "HTML", "RSS", "JSON", "RSD", "ArchiveJSON", "PhotosJSON", "PodcastXML", "PodcastJSON" ],
+    "page": [ "HTML" ],
+    "section": [ "HTML" ],
+    "taxonomy": [ "HTML", "RSS", "JSON" ],
+    "taxonomyTerm": [ "HTML", "RSS", "JSON" ]
+  },
+  "taxonomies": {
+    "category": "categories"
+  },
+  "rssLimit": 25,
+  "uglyURLs": false,
+  "blackfriday": {
+    "fractions": false
+  },
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    }
+  },
+  "enableRobotsTXT": true,
+  "languageCode": "[LANGUAGE]",
+  "paginate": 25,
+  "params": {
+    "description": "Follow <a href=\"https://micro.blog/janedoe\">@janedoe on Micro.blog</a>.",
+    "paginate_home": false,
+    "paginate_categories": false,
+    "paginate_replies": false,
+    "theme_seconds": "0",
+    "plugins_css": [],
+    "plugins_js": [],
+    "plugins_html": []
+  }
+}
