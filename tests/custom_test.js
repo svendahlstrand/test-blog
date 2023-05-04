@@ -11,3 +11,14 @@ Deno.test("Custom footer content is present on homepage", () => {
     "🌱 Yahaha! You found me!",
     "Custom footer content is not right.");
 });
+
+Deno.test("Custom CSS is present on homepage", () => {
+  const document = loadPublicHtmlFile("./index.html");
+  const customCSSLink = document.querySelector('link[href^="/custom.css"');
+
+  assertExists(customCSSLink, "No custom CSS link found on page.");
+  assertEquals(
+    customCSSLink.getAttribute('rel'),
+    "stylesheet",
+    "The custom CSS link relationship is not set to stylesheet.");
+});
