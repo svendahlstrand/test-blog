@@ -84,8 +84,8 @@
     "paginate_replies": false,
     "include_conversation": true,
     "theme_seconds": "0",
-    "plugins_css": [],
-    "plugins_js": [],
-    "plugins_html": []
+    "plugins_css": ["/plugin_flag_41429785.css"],
+    "plugins_js": ["/plugin_flag_41429785.js"],
+    "plugins_html": ["plugin_flag_41429785.html"]
   }
 }
