@@ -5,7 +5,7 @@
       "avatar": "/avatar.jpg",
       "username": "janedoe"
     },
-    "baseURL": "http://localhost:1313/",
+    "baseURL": "https://janedoe.micro.blog",
     "theme": ["theme-under-test", "theme-blank"],
   "mediaTypes": {
     "application/json": {
