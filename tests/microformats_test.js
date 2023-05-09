@@ -47,3 +47,24 @@ Deno.test("Micropost entry have valid microformats on homepage", () => {
   assertExists(micropostURL, 'Micropost should have u-url microformat.');
   assertStringIncludes(micropostURL.getAttribute('href'), '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
 });
+
+Deno.test("Micropost have valid microformats on permalink page", () => {
+  const micropost = loadPublicHtmlFile("./2023/04/20/happy-earth-day.html");
+  const micropostEntry = micropost.querySelector('.h-entry');
+  const micropostContent = micropostEntry.querySelector('.e-content');
+  const micropostPublished = micropostEntry.querySelector('.dt-published');
+  const micropostURL = micropostEntry.querySelector('.u-url');
+
+  // TODO: Start using a proper mf2 parser instead. The following is a bit to
+  //       naive and won't work with themes that list authors, for example.
+  //assertEquals(micropostEntry.querySelector('.p-name'), null, 'Micropost should not have p-name microformat.');
+
+  assertExists(micropostContent, 'Micropost should have e-content microformat.');
+  assertStringIncludes(micropostContent.textContent, 'Happy Earth Day!', 'e-content should contain post body.');
+
+  assertExists(micropostPublished, 'Micropost should have dt-published microformat.');
+  assertStringIncludes(micropostPublished.getAttribute('datetime'), '2023-04-20', 'Publish date should be correct.');
+
+  assertExists(micropostURL, 'Micropost should have u-url microformat.');
+  assertStringIncludes(micropostURL.getAttribute('href'), '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
+});
