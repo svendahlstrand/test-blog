@@ -2,5 +2,6 @@
 title: Archive
 menu: main
 url: /archive/
-type: page
+type: archive
+layout: list.archivehtml
 ---
