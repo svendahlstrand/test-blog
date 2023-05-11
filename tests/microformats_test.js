@@ -18,87 +18,87 @@ Object.entries(homepageAndArchive).forEach(([name, page]) => {
   });
 
   Deno.test(`Post entry have valid microformats on ${name}`, () => {
-    const postEntry = closest('.h-entry', feed?.querySelector('a[href$="/2023/03/27/the-joy-of.html"]'));
-    const postName = postEntry.querySelector('.p-name');
-    const postContent = postEntry.querySelector('.e-content');
-    const postPublished = postEntry.querySelector('.dt-published');
-    const postURL = postEntry.querySelector('.u-url');
+    const entry = closest('.h-entry', feed?.querySelector('a[href$="/2023/03/27/the-joy-of.html"]'));
+    const entryName = entry.querySelector('.p-name');
+    const entryContentOrSummary = entry.querySelector('.e-content, .p-summary');
+    const entryPublished = entry.querySelector('.dt-published');
+    const entryURL = entry.querySelector('.u-url');
 
-    assertExists(postName, 'Post should have p-name microformat.');
-    assertEquals(postName.textContent, 'The Joy of Having a Personal Blog', 'p-name should be the title.');
+    assertExists(entryName, 'Post should have p-name microformat.');
+    assertEquals(entryName.textContent, 'The Joy of Having a Personal Blog', 'p-name should be the title.');
 
-    assertExists(postContent, 'Post should have e-content microformat.');
-    assertStringIncludes(postContent.textContent, 'Blogging has become increasingly popular', 'e-content should contain post body.');
+    assertExists(entryContentOrSummary, 'Post should have e-content or p-summary microformat.');
+    assertStringIncludes(entryContentOrSummary.textContent, 'Blogging has become increasingly popular', 'e-content and p-summary should contain post body.');
 
-    assertExists(postPublished, 'Post should have dt-published microformat.');
-    assertStringIncludes(postPublished.getAttribute('datetime') || '', '2023-03-27', 'Publish date should be correct.');
+    assertExists(entryPublished, 'Post should have dt-published microformat.');
+    assertStringIncludes(entryPublished.getAttribute('datetime') || '', '2023-03-27', 'Publish date should be correct.');
 
-    assertExists(postURL, 'Post should have u-url microformat.');
-    assertStringIncludes(postURL.getAttribute('href') || '', '/2023/03/27/the-joy-of.html', 'URL should be correct.');
+    assertExists(entryURL, 'Post should have u-url microformat.');
+    assertStringIncludes(entryURL.getAttribute('href') || '', '/2023/03/27/the-joy-of.html', 'URL should be correct.');
   });
 
   Deno.test(`Micropost entry have valid microformats on ${name}`, () => {
-    const micropostEntry = closest('.h-entry', feed?.querySelector('a[href$="/2023/04/20/happy-earth-day.html"]'));
-    const micropostContent = micropostEntry.querySelector('.e-content');
-    const micropostPublished = micropostEntry.querySelector('.dt-published');
-    const micropostURL = micropostEntry.querySelector('.u-url');
+    const entry = closest('.h-entry', feed?.querySelector('a[href$="/2023/04/20/happy-earth-day.html"]'));
+    const entryContentOrSummary = entry.querySelector('.e-content, .p-summary');
+    const entryPublished = entry.querySelector('.dt-published');
+    const entryURL = entry.querySelector('.u-url');
 
-    assertEquals(micropostEntry.querySelector('.p-name'), null, 'Micropost should not have p-name microformat.');
+    assertEquals(entry.querySelector('.p-name'), null, 'Micropost should not have p-name microformat.');
 
-    assertExists(micropostContent, 'Micropost should have e-content microformat.');
-    assertStringIncludes(micropostContent.textContent, 'Happy Earth Day!', 'e-content should contain post body.');
+    assertExists(entryContentOrSummary, 'Micropost should have e-content or p-summary microformat.');
+    assertStringIncludes(entryContentOrSummary.textContent, 'Happy Earth Day!', 'e-content and p-summary should contain post body.');
 
-    assertExists(micropostPublished, 'Micropost should have dt-published microformat.');
-    assertStringIncludes(micropostPublished.getAttribute('datetime') || '', '2023-04-20', 'Publish date should be correct.');
+    assertExists(entryPublished, 'Micropost should have dt-published microformat.');
+    assertStringIncludes(entryPublished.getAttribute('datetime') || '', '2023-04-20', 'Publish date should be correct.');
 
-    assertExists(micropostURL, 'Micropost should have u-url microformat.');
-    assertStringIncludes(micropostURL.getAttribute('href') || '', '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
+    assertExists(entryURL, 'Micropost should have u-url microformat.');
+    assertStringIncludes(entryURL.getAttribute('href') || '', '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
   });
 });
 
 Deno.test("Post have valid microformats on permalink page", () => {
-  const post = mfFromPublicHtmlFile("/2023/03/27/the-joy-of.html");
-  const postEntry = post.items.find(item => item.type.includes('h-entry'))
+  const microFormats = mfFromPublicHtmlFile("/2023/03/27/the-joy-of.html");
+  const entry = microFormats.items.find(item => item.type.includes('h-entry'))
 
-  assertExists(postEntry, "No h-entry found on page.");
+  assertExists(entry, "No h-entry found on page.");
 
-  const postName = postEntry.properties.name?.find(first);
-  const postContent = postEntry.properties.content?.find(first).value;
-  const postPublished =  postEntry.properties.published?.find(first);
-  const postURL = postEntry.properties.url?.find(first);
+  const entryName = entry.properties.name?.find(first);
+  const entryContent = entry.properties.content?.find(first).value;
+  const entryPublished =  entry.properties.published?.find(first);
+  const entryURL = entry.properties.url?.find(first);
 
-  assertExists(postName, 'Post should have p-name microformat.');
-  assertEquals(postName, 'The Joy of Having a Personal Blog', 'p-name should be post title.');
+  assertExists(entryName, 'Post should have p-name microformat.');
+  assertEquals(entryName, 'The Joy of Having a Personal Blog', 'p-name should be post title.');
 
-  assertExists(postContent, 'Post should have e-content microformat.');
-  assertStringIncludes(postContent, 'Blogging has become increasingly popular', 'e-content should contain post body.');
+  assertExists(entryContent, 'Post should have e-content microformat.');
+  assertStringIncludes(entryContent, 'Blogging has become increasingly popular', 'e-content should contain post body.');
 
-  assertExists(postPublished, 'Post should have dt-published microformat.');
-  assertStringIncludes(postPublished, '2023-03-27', 'Publish date should be correct.');
+  assertExists(entryPublished, 'Post should have dt-published microformat.');
+  assertStringIncludes(entryPublished, '2023-03-27', 'Publish date should be correct.');
 
-  assertExists(postURL, 'Post should have u-url microformat.');
-  assertStringIncludes(postURL, '/2023/03/27/the-joy-of.html', 'URL should be correct.');
+  assertExists(entryURL, 'Post should have u-url microformat.');
+  assertStringIncludes(entryURL, '/2023/03/27/the-joy-of.html', 'URL should be correct.');
 });
 
 Deno.test("Micropost have valid microformats on permalink page", () => {
-  const micropost = mfFromPublicHtmlFile("/2023/04/20/happy-earth-day.html");
-  const micropostEntry = micropost.items.find(item => item.type.includes('h-entry'))
+  const microFormats = mfFromPublicHtmlFile("/2023/04/20/happy-earth-day.html");
+  const entry = microFormats.items.find(item => item.type.includes('h-entry'))
 
-  assertExists(micropostEntry, "No h-entry found on page.");
+  assertExists(entry, "No h-entry found on page.");
 
-  const micropostName = micropostEntry.properties.name?.find(first);
-  const micropostContent = micropostEntry.properties.content?.find(first).value;
-  const micropostPublished =  micropostEntry.properties.published?.find(first);
-  const micropostURL = micropostEntry.properties.url?.find(first);
+  const entryName = entry.properties.name?.find(first);
+  const entryContent = entry.properties.content?.find(first).value;
+  const entryPublished =  entry.properties.published?.find(first);
+  const entryURL = entry.properties.url?.find(first);
 
-  assertEquals(micropostName, undefined, 'Micropost should not have p-name microformat.');
+  assertEquals(entryName, undefined, 'Micropost should not have p-name microformat.');
 
-  assertExists(micropostContent, 'Micropost should have e-content microformat.');
-  assertStringIncludes(micropostContent, 'Happy Earth Day!', 'e-content should contain post body.');
+  assertExists(entryContent, 'Micropost should have e-content microformat.');
+  assertStringIncludes(entryContent, 'Happy Earth Day!', 'e-content should contain post body.');
 
-  assertExists(micropostPublished, 'Micropost should have dt-published microformat.');
-  assertStringIncludes(micropostPublished, '2023-04-20', 'Publish date should be correct.');
+  assertExists(entryPublished, 'Micropost should have dt-published microformat.');
+  assertStringIncludes(entryPublished, '2023-04-20', 'Publish date should be correct.');
 
-  assertExists(micropostURL, 'Micropost should have u-url microformat.');
-  assertStringIncludes(micropostURL, '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
+  assertExists(entryURL, 'Micropost should have u-url microformat.');
+  assertStringIncludes(entryURL, '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
 });
