@@ -31,10 +31,10 @@ Object.entries(homepageAndArchive).forEach(([name, page]) => {
     assertStringIncludes(postContent.textContent, 'Blogging has become increasingly popular', 'e-content should contain post body.');
 
     assertExists(postPublished, 'Post should have dt-published microformat.');
-    assertStringIncludes(postPublished.getAttribute('datetime'), '2023-03-27', 'Publish date should be correct.');
+    assertStringIncludes(postPublished.getAttribute('datetime') || '', '2023-03-27', 'Publish date should be correct.');
 
     assertExists(postURL, 'Post should have u-url microformat.');
-    assertStringIncludes(postURL.getAttribute('href'), '/2023/03/27/the-joy-of.html', 'URL should be correct.');
+    assertStringIncludes(postURL.getAttribute('href') || '', '/2023/03/27/the-joy-of.html', 'URL should be correct.');
   });
 
   Deno.test(`Micropost entry have valid microformats on ${name}`, () => {
@@ -49,10 +49,10 @@ Object.entries(homepageAndArchive).forEach(([name, page]) => {
     assertStringIncludes(micropostContent.textContent, 'Happy Earth Day!', 'e-content should contain post body.');
 
     assertExists(micropostPublished, 'Micropost should have dt-published microformat.');
-    assertStringIncludes(micropostPublished.getAttribute('datetime'), '2023-04-20', 'Publish date should be correct.');
+    assertStringIncludes(micropostPublished.getAttribute('datetime') || '', '2023-04-20', 'Publish date should be correct.');
 
     assertExists(micropostURL, 'Micropost should have u-url microformat.');
-    assertStringIncludes(micropostURL.getAttribute('href'), '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
+    assertStringIncludes(micropostURL.getAttribute('href') || '', '/2023/04/20/happy-earth-day.html', 'URL should be correct.');
   });
 });
 
