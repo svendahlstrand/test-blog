@@ -57,7 +57,7 @@
     "page": [ "HTML" ],
     "section": [ "HTML" ],
     "taxonomy": [ "HTML", "RSS", "JSON" ],
-    "taxonomyTerm": [ "HTML", "RSS", "JSON" ]
+    "term": [ "HTML", "RSS", "JSON" ]
   },
   "taxonomies": {
     "category": "categories"
