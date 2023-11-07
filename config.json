@@ -75,7 +75,7 @@
     }
   },
   "enableRobotsTXT": true,
-  "languageCode": "[LANGUAGE]",
+  "languageCode": "en",
   "paginate": 25,
   "params": {
     "description": "Follow <a href=\"https://micro.blog/janedoe\">@janedoe on Micro.blog</a>.",
