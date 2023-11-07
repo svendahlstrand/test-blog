@@ -79,6 +79,7 @@
   "paginate": 25,
   "params": {
     "description": "Follow <a href=\"https://micro.blog/janedoe\">@janedoe on Micro.blog</a>.",
+    "site_id": "00000",
     "paginate_home": false,
     "paginate_categories": false,
     "paginate_replies": false,
